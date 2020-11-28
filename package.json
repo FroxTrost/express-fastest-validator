@@ -13,8 +13,10 @@
   "keywords": [
     "Express",
     "Request",
-    "Request",
-    "Validation"
+    "node",
+    "Validation",
+    "validator",
+    "express validation"
   ],
   "author": "FroxTrost",
   "license": "ISC",
