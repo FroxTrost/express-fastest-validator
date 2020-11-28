@@ -11,15 +11,15 @@ Error handling in a large project has always been a complex task in express proj
 
 Install with npm
 
-```
+``` javascript
 npm install express-fastest-validator
-```
+``` javascript
 
 Install with yarn
 
-```
+``` javascript
 yarn add express-fastest-validator
-```
+``` javascript
 
 ## Request Properties
 
@@ -35,7 +35,7 @@ express-fastest-validator supports multiple [express request properties](https:/
 
 express-fastest-validator uses [fastest-validator](https://github.com/icebob/fastest-validator) which is the the **fastest JS validator library for NodeJS | Browser**.
 
-```
+``` javascript
 // Schema for validating user login API
 const loginSchema = {
     'body':{
@@ -43,14 +43,7 @@ const loginSchema = {
         password: {type: "string", min: 8}
     }
 }
-
-// getUserSchema
-const getUserSchema = {
-    'params': {
-        userId: {type: "string"}
-    }
-}
-```
+``` 
 
 Read complete
 **[docs](https://github.com/icebob/fastest-validator)
@@ -60,7 +53,7 @@ for field types and built-in validators**
 
 You just need to define your schema and plug it into your API route. This is all you need to do.
 
-```
+``` javascript
 const { express } = require("express");
 const { validator } = require("express-fastest-validator");
 
@@ -84,7 +77,7 @@ Middleware can be used to handle all the API errors within a single peace of cod
 
 Read more about [Error-handling Middleware](https://expressjs.com/en/guide/using-middleware.html#middleware.error-handling)
 
-```
+``` javascript
 const errorHandler = (err, req, res, next) => {
   /*
    * FXValidationError will be raised by express-fastest-validator if the request is invalid.
@@ -108,7 +101,7 @@ app.use(errorHandler);
 
 ## Example
 
-```
+``` javascript
 const express = require("express");
 const { validator, FXValidationError } = require("express-fastest-validator");
 
