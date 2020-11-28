@@ -1,0 +1,31 @@
+{
+  "name": "express-request-fastest-validator",
+  "version": "1.0.0",
+  "description": "Fastest request validation library",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FroxTrost/express-request-fastest-validator.git"
+  },
+  "keywords": [
+    "Express",
+    "Request",
+    "Request",
+    "Validation"
+  ],
+  "author": "FroxTrost",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FroxTrost/express-request-fastest-validator/issues"
+  },
+  "homepage": "https://github.com/FroxTrost/express-request-fastest-validator#readme",
+  "dependencies": {
+    "@types/express": "^4.17.9",
+    "esm": "^3.2.25",
+    "fastest-validator": "^1.9.0"
+  },
+  "type": "module"
+}
