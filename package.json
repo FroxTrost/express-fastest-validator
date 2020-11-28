@@ -1,8 +1,8 @@
 {
   "name": "express-fastest-validator",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "Fastest request validation library",
-  "main": "./src/index.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
