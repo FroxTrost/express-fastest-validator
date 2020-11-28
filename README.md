@@ -11,15 +11,15 @@ Error handling in a large project has always been a complex task in express proj
 
 Install with npm
 
-``` javascript
+``` 
 npm install express-fastest-validator
-``` javascript
+``` 
 
 Install with yarn
 
-``` javascript
+``` 
 yarn add express-fastest-validator
-``` javascript
+``` 
 
 ## Request Properties
 
