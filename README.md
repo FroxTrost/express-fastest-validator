@@ -11,15 +11,15 @@ Error handling in a large project has always been a complex task in express proj
 
 Install with npm
 
-``` 
+```
 npm install express-fastest-validator
-``` 
+```
 
 Install with yarn
 
-``` 
+```
 yarn add express-fastest-validator
-``` 
+```
 
 ## Request Properties
 
@@ -35,15 +35,15 @@ express-fastest-validator supports multiple [express request properties](https:/
 
 express-fastest-validator uses [fastest-validator](https://github.com/icebob/fastest-validator) which is the the **fastest JS validator library for NodeJS | Browser**.
 
-``` javascript
+```javascript
 // Schema for validating user login API
 const loginSchema = {
-    'body':{
-        username: {type: "string", min: 3, max: 15},
-        password: {type: "string", min: 8}
-    }
-}
-``` 
+  body: {
+    username: { type: "string", min: 3, max: 15 },
+    password: { type: "string", min: 8 },
+  },
+};
+```
 
 Read complete
 **[docs](https://github.com/icebob/fastest-validator)
@@ -53,7 +53,7 @@ for field types and built-in validators**
 
 You just need to define your schema and plug it into your API route. This is all you need to do.
 
-``` javascript
+```javascript
 const { express } = require("express");
 const { validator } = require("express-fastest-validator");
 
@@ -77,7 +77,7 @@ Middleware can be used to handle all the API errors within a single peace of cod
 
 Read more about [Error-handling Middleware](https://expressjs.com/en/guide/using-middleware.html#middleware.error-handling)
 
-``` javascript
+```javascript
 const errorHandler = (err, req, res, next) => {
   /*
    * FXValidationError will be raised by express-fastest-validator if the request is invalid.
@@ -101,9 +101,12 @@ app.use(errorHandler);
 
 ## Example
 
-``` javascript
+```javascript
 const express = require("express");
+const bodyParser = require("body-parser");
 const { validator, FXValidationError } = require("express-fastest-validator");
+
+const PORT = 8000;
 
 const schema = {
   params: {
@@ -115,9 +118,11 @@ const schema = {
 };
 
 const app = express();
-const PORT = 8000;
 
-app.get("/user/:username", validator(schema), (req, res) => {
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+app.post("/user/:username", validator(schema), (req, res) => {
   const { age } = req.body;
   const { username } = req.params;
   res.status(200).send(`Welcome 🔥${username}🔥, you are ${age} years old`);
@@ -135,6 +140,6 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`⚡️[server]: Server is running at https://localhost:${PORT}`);
+  console.log(`⚡️[server]: Server is running at http://localhost:${PORT}`);
 });
 ```

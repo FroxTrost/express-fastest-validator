@@ -1,4 +1,4 @@
-import validator from "./src/validator";
-import ValidationError from "./src/ValidationError";
+const validator = require("./src/validator");
+const FXValidationError = require("./src/ValidationError");
 
-export default { validator, ValidationError };
+module.exports = { validator, FXValidationError };

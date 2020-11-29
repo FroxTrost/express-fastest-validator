@@ -1,4 +1,4 @@
-class ValidationError extends Error {
+class FXValidationError extends Error {
   constructor(description) {
     super(description);
     this.message = "request validation error";
@@ -6,4 +6,4 @@ class ValidationError extends Error {
   }
 }
 
-export default ValidationError;
+module.exports = FXValidationError;
