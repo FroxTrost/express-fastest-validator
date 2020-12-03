@@ -1,6 +1,6 @@
 {
   "name": "express-fastest-validator",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Fastest request validation library",
   "main": "index.js",
   "scripts": {
@@ -16,7 +16,8 @@
     "node",
     "Validation",
     "validator",
-    "express validation"
+    "express validation",
+    "fastest validator"
   ],
   "author": "FroxTrost",
   "license": "ISC",

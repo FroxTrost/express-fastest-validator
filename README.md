@@ -40,8 +40,8 @@ express-fastest-validator uses [fastest-validator](https://github.com/icebob/fas
 const loginSchema = {
   body: {
     username: { type: "string", min: 3, max: 15 },
-    password: { type: "string", min: 8 },
-  },
+    password: { type: "string", min: 8 }
+  }
 };
 ```
 
@@ -62,18 +62,22 @@ const app = express();
 const loginSchema = {
   body: {
     username: { type: "string", min: 3, max: 15 },
-    password: { type: "string", min: 8 },
-  },
+    password: { type: "string", min: 8 }
+  }
 };
 
 app.post("/api/user", validator(loginSchema), userController.login);
 ```
 
+<!-- If you need to use your custom middleware instead of the default error messages
+you can create custom error handling middleware and
+notify validator about this in options using customErrorMiddleware: true  -->
+
 ## Error Handling Middleware
 
 [Express Middleware](https://expressjs.com/en/guide/using-middleware.html) provides the power of handling the request response cycle with ease.
 
-Middleware can be used to handle all the API errors within a single peace of code. You can use a middleware to handle all the API errors in your project. **You can define your error handling middleware after defining all your routes**. This is because we want the error handling middleware to run just before sending the response to check weather the API is returning a valid response or an error.
+Middleware can be used to handle all the API errors within a single peace of code. You can use a middleware to handle all the API errors in your project. **You must define your error handling middleware after defining all your routes and all other middleware dependencies**. This is because we want the error handling middleware to run just before sending the response to check weather the API is returning a valid response or an error.
 
 Read more about [Error-handling Middleware](https://expressjs.com/en/guide/using-middleware.html#middleware.error-handling)
 
@@ -110,11 +114,11 @@ const PORT = 8000;
 
 const schema = {
   params: {
-    username: { type: "string", min: 3, max: 15 },
+    username: { type: "string", min: 3, max: 15 }
   },
   body: {
-    age: { type: "number", positive: true, integer: true },
-  },
+    age: { type: "number", positive: true, integer: true }
+  }
 };
 
 const app = express();
@@ -122,7 +126,9 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.post("/user/:username", validator(schema), (req, res) => {
+//Need to pass { customErrorMiddleware: true } in validator options to notify the validator that
+//Custom Error Middleware is used.
+app.post("/user/:username", validator(schema, { customErrorMiddleware: true }), (req, res) => {
   const { age } = req.body;
   const { username } = req.params;
   res.status(200).send(`Welcome 🔥${username}🔥, you are ${age} years old`);
@@ -132,6 +138,8 @@ app.post("/user/:username", validator(schema), (req, res) => {
 app.use((err, req, res, next) => {
   if (err instanceof FXValidationError) {
     // Handle request invalidation error
+    //tweak with err.description
+    //to create your own error message
     res.status(400).send(err.description);
   } else {
     // Handle all the others except request invalidation errors.
