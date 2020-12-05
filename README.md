@@ -39,8 +39,8 @@ express-fastest-validator uses [fastest-validator](https://github.com/icebob/fas
 // Schema for validating user login API
 const loginSchema = {
   body: {
-    username: { type: "string", min: 3, max: 15 },
-    password: { type: "string", min: 8 },
+    username: { type: 'string', min: 3, max: 15 },
+    password: { type: 'string', min: 8 },
   },
 };
 ```
@@ -54,19 +54,19 @@ for field types and built-in validators**
 You just need to define your schema and plug it into your API route. This is all you need to do.
 
 ```javascript
-const { express } = require("express");
-const { validator } = require("express-fastest-validator");
+const { express } = require('express');
+const { validator } = require('express-fastest-validator');
 
 const app = express();
 
 const loginSchema = {
   body: {
-    username: { type: "string", min: 3, max: 15 },
-    password: { type: "string", min: 8 },
+    username: { type: 'string', min: 3, max: 15 },
+    password: { type: 'string', min: 8 },
   },
 };
 
-app.post("/api/user", validator(loginSchema), userController.login);
+app.post('/api/user', validator(loginSchema), userController.login);
 ```
 
 ## Error Handling Middleware
@@ -91,7 +91,7 @@ const errorHandler = (err, req, res, next) => {
   if (err instanceof MyAPIError) {
     res.status(err.status).send(err.message);
   } else {
-    res.status(500).send("something went wrong");
+    res.status(500).send('something went wrong');
   }
 };
 
@@ -99,21 +99,21 @@ const errorHandler = (err, req, res, next) => {
 app.use(errorHandler);
 ```
 
-## Example
+## Custom Error Handling Example
 
 ```javascript
-const express = require("express");
-const bodyParser = require("body-parser");
-const { validator, FXValidationError } = require("express-fastest-validator");
+const express = require('express');
+const bodyParser = require('body-parser');
+const { validator, FXValidationError } = require('express-fastest-validator');
 
 const PORT = 8000;
 
 const schema = {
   params: {
-    username: { type: "string", min: 3, max: 15 },
+    username: { type: 'string', min: 3, max: 15 },
   },
   body: {
-    age: { type: "number", positive: true, integer: true },
+    age: { type: 'number', positive: true, integer: true },
   },
 };
 
@@ -122,11 +122,14 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.post("/user/:username", validator(schema), (req, res) => {
+app.post('/user/:username', validator(schema), (req, res) => {
   const { age } = req.body;
   const { username } = req.params;
   res.status(200).send(`Welcome 🔥${username}🔥, you are ${age} years old`);
 });
+
+// Set the value of errorHandlerMiddleware to true
+app.set('errorHandlerMiddleware', true);
 
 // Error Handling Middleware
 app.use((err, req, res, next) => {
@@ -135,7 +138,7 @@ app.use((err, req, res, next) => {
     res.status(400).send(err.description);
   } else {
     // Handle all the others except request invalidation errors.
-    res.status(500).send("something went wrong");
+    res.status(500).send('something went wrong');
   }
 });
 
