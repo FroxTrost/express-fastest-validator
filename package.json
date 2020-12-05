@@ -4,8 +4,15 @@
   "description": "Fastest request validation library",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint --fix --ext .js,.jsx . && echo '🔥Lint complete🔥'",
+    "prettier": "prettier",
+    "pre-commit": "npm run lint"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/FroxTrost/express-request-fastest-validator.git"
@@ -26,5 +33,14 @@
   "homepage": "https://github.com/FroxTrost/express-request-fastest-validator#readme",
   "dependencies": {
     "fastest-validator": "^1.9.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.15.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-prettier": "^3.2.0",
+    "prettier": "^2.2.1",
+    "husky": "^4.3.4"
   }
 }
