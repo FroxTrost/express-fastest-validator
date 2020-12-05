@@ -1,7 +1,7 @@
 class FXValidationError extends Error {
   constructor(description) {
     super(description);
-    this.message = "request validation error";
+    this.message = 'request validation error';
     this.description = description;
   }
 }
