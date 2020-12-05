@@ -5,7 +5,7 @@ const ValidationError = require('./ValidationError');
 const v = new Validator();
 
 const handleError = (req, res, next, error) => {
-  if (req.app.errorHandlerMiddleware) {
+  if (req.app.get('errorHandlerMiddleware')) {
     next(new ValidationError(error));
   } else {
     res.status(400).send(error);
